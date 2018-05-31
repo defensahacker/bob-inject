@@ -14,10 +14,8 @@
 
 # CEWL=../CeWL/
 
-
-
 if [ $# -lt 2 ] ; then
-	echo "Usage $0 <BASEURL> <PAGENAME> [<PAGENAME> <...>]"
+	echo "Usage $0 [--proxy 127.0.0.1:8787] <BASEURL> <PAGENAME> [<PAGENAME> <...>]"
 	echo "Example: $0 http://www.example.com/admin index.php"
 	exit
 fi
@@ -26,9 +24,10 @@ fi
 UA="Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0"
 BASEURL=$1
 PAGENAME=$2
-CURL="curl --insecure"
+CURL="curl -k -I -A $UA --proxy 127.0.0.1:8787"
+VERSION="1.4"
 
-echo "BOB INJECT v1.3"
+echo "BOB INJECT v$VERSION"
 echo "[*] Injecting into $BASEURL..."
 echo
 
@@ -36,7 +35,7 @@ echo
 for i in $(cat db_files db_dirs db_shortnames | grep -v ^#)
 do
 	# echo $BASEURL/$i
-	($CURL -A $UA -I "$BASEURL/$i") 2> /dev/null | head -1 | grep -v 404
+	($CURL "$BASEURL/$i") 2> /dev/null | head -1 | grep -v 404
 	if [ $? == 0 ] ; then
 		echo "[*] $BASEURL/$i"
 	fi
@@ -50,7 +49,7 @@ done
 # Use $BASEURL/$PAGENAME
 for i in $(cat db_suffixes_app db_suffixes_sub | grep -v ^#) ; do
 	# echo "$BASEURL/$PAGENAME$i"
-	($CURL -A $UA -I "$BASEURL/$PAGENAME$i") 2> /dev/null | head -1 | grep -v 404
+	($CURL "$BASEURL/$PAGENAME$i") 2> /dev/null | head -1 | grep -v 404
 	if [ $? == 0 ] ; then
 		echo "[*] $BASEURL/$PAGENAME$i"
 	fi
@@ -61,7 +60,7 @@ EXT=$(echo -n $PAGENAME | cut -d'.' -f2)
 for i in $(cat db_suffixes_sub db_suffixes_app | grep -v ^#) ; do
 	PREF=$BASEURL/$(echo $PAGENAME | sed "s/\.$EXT//g")
 	# echo $PREF$i
-	($CURL -A $UA -I "$PREF$i") 2> /dev/null | head -1 | grep -v 404
+	($CURL "$PREF$i") 2> /dev/null | head -1 | grep -v 404
 	if [ $? == 0 ] ; then
 		echo "[*] $PREF$i"
 	fi
