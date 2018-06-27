@@ -39,6 +39,7 @@ htpasswd.txt
 admin.php
 administrator.php
 config.php
+config.ini
 install.php
 install.old
 install.bak
