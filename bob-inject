@@ -15,7 +15,7 @@
 # CEWL=../CeWL/
 
 if [ $# -lt 2 ] ; then
-	echo "Usage $0 [--proxy 127.0.0.1:8787] <BASEURL> <PAGENAME> [<PAGENAME> <...>]"
+	echo "Usage $0 <BASEURL> <PAGENAME> [<PAGENAME> <...>]"
 	echo "Example: $0 http://www.example.com/admin index.php"
 	exit
 fi
@@ -24,7 +24,8 @@ fi
 UA="Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0"
 BASEURL=$1
 PAGENAME=$2
-CURL="curl -k -I -A $UA --proxy 127.0.0.1:8787"
+# CURL="curl -k -I -A $UA --proxy 127.0.0.1:8787"
+CURL="curl -k -I -A $UA"
 VERSION="1.4"
 
 echo "BOB INJECT v$VERSION"
