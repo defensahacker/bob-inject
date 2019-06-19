@@ -62,3 +62,21 @@ listDatabases?text=1
 replSetGetStatus?text=1
 serverStatus?text=1
 top?text=1
+# swagger
+swagger-resources
+swagger-ui.html
+v2/api-docs
+# Monitoring
+management/health
+management/metrics/process.files.max
+management/metrics/system.cpu.count
+management/info
+# Envoy
+certs
+clusters
+help
+config_dump
+contention
+server_info
+stats
+runtime
