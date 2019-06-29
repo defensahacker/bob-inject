@@ -80,3 +80,5 @@ contention
 server_info
 stats
 runtime
+# looking for open redirects based on PATH_INFO
+https://www.google.com
