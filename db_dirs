@@ -1,4 +1,5 @@
 # Common directories
+changelog/
 # Apache AXIS
 internet/.jws
 internet/services/Version?wsdl
