@@ -22,4 +22,4 @@ It is an open source tool, I have added some useful payloads (batteries included
 ```
 
 
-(c) spinfoo, 2018
+(c) defensahacker 2018
